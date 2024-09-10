@@ -106,7 +106,7 @@ watch(() => store.state, (newVal) => {
     </nav>
     <div v-if="showSelsctWallet" class="select-wallet flex-center-center">
       <div class="selsct-wallet-box">
-        <img src="../assets/images/icon/close.svg" alt="" class="close">
+        <img src="../assets/images/icon/close.svg" alt="" class="close" @click="showSelsctWallet = false">
         <div class="title flex-center-start">
           <img src="../assets/images/wallet.png" alt="">
           <span>选择钱包</span>
