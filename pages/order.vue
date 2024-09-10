@@ -1,6 +1,18 @@
 <script setup>
+import { ref, onBeforeMount } from 'vue';
 const addr = '0x111111'
-const { data, status, error, refresh, clear } = await useFetch(`https://blinkmart.up.railway.app/api/bm-orders?populate[sku_rel][populate][0]=sku_image&filters[buyer_addr]=${addr}`);
+
+const data = ref(null);
+const status = ref('loading');
+
+const getData = async () => {
+  const res = await fetch(`https://blinkmart.up.railway.app/api/bm-orders?populate[sku_rel][populate][0]=sku_image&filters[buyer_addr]=${addr}`);
+  const result = await res.json();
+  if (result.code == 0) {
+    data.value = result.data;
+    status.value = 'success';
+  }
+}
 const updateOrder = async (item) => {
   console.log(item);
   const res = await fetch(`https://blinkmart.up.railway.app/api/bm-orders/${item.id}`, {
@@ -18,13 +30,17 @@ const updateOrder = async (item) => {
     refresh();
   }
 }
+
+onBeforeMount(() => {
+  getData();
+});
 </script>
 <template>
   <div class="wrapper">
     <div class="content" style="padding-bottom: 100px;">
       <Breadcrumb :list="[{name: '个人中心', path: ''}]" />
       <BTitle title="购买的商品" style="margin-top: 8px;margin-bottom: 20px;"></BTitle>
-      <List :list="(status == 'success' && data.code == 0) ? data.data : []" type="order" v-slot="slotProps">
+      <List :list="(status == 'success') ? data : []" type="order" v-slot="slotProps">
         <div>
           <AButton v-if="slotProps.item.deliever_status == 1" text="确认收货" @click="updateOrder(slotProps.item)" />
         </div>

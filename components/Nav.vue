@@ -70,15 +70,15 @@ watch(() => store.state, (newVal) => {
       <div v-else class="menu flex-center-start">
         <div class="menu-item flex-center-start">
           <img src="../assets/images/package.svg" alt="">
-          <NuxtLink to="/warehouse/">我的仓库</NuxtLink>
+          <NuxtLink to="/warehouse">我的仓库</NuxtLink>
         </div>
         <div class="menu-item flex-center-start">
           <img src="../assets/images/clipboard.svg" alt="">
-          <NuxtLink to="/sales-order/">销售订单</NuxtLink>
+          <NuxtLink to="/sales-order">销售订单</NuxtLink>
         </div>
         <div class="menu-item flex-center-start">
           <img src="../assets/images/user.svg" alt="">
-          <NuxtLink to="/order/">个人中心</NuxtLink>
+          <NuxtLink to="/order">个人中心</NuxtLink>
         </div>
         <div class="balance flex-center-center">
           <div class="box">
