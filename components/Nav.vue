@@ -48,6 +48,7 @@ const copy = (text) => {
 
 const disconnect = () => {
   init()
+  router.push('/')
 };
 
 watch(() => store.state, (newVal) => {
