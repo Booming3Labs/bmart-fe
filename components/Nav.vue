@@ -1,13 +1,13 @@
 <script setup>
-import { ref, watch, onMounted} from "vue";
+import { ref, watch } from "vue";
 import { Connection, clusterApiUrl } from "@solana/web3.js";
 import { useGlobalStore } from "../hooks";
 
+const connection = new Connection(clusterApiUrl("testnet"));
 const { store, setWallet, init } = useGlobalStore();
 
 const showPrompt = ref(true);
 const showSelsctWallet = ref(false);
-const connection = ref(null);
 
 const connectWallet = async (wallet) => {
   console.log(wallet);
@@ -19,7 +19,7 @@ const connectWallet = async (wallet) => {
       //连接了solana钱包，得到了钱包地址
       console.log('resp.publicKey.toString() :', resp.publicKey.toString());
       // 获取余额
-      const balance = await connection.value.getBalance(resp.publicKey);
+      const balance = await connection.getBalance(resp.publicKey);
       setWallet({
         address: resp.publicKey.toString(),
         balance: balance.toFixed(2),
@@ -49,10 +49,6 @@ const copy = (text) => {
 const disconnect = () => {
   init()
 };
-
-onMounted(() => {
-  connection.value = new Connection(clusterApiUrl("testnet"));
-});
 
 watch(() => store.state, (newVal) => {
   console.log(newVal);
@@ -91,7 +87,7 @@ watch(() => store.state, (newVal) => {
           <span class="sol">SOL</span>
         </div>
         <div class="address flex-center-center">
-          <img :src="store.state.walletLogo" alt="" class="wallet-logo">
+          <img v-if="store.state.wallet == 'phantom'" src="../assets/images/icon/phantom.svg" alt="" class="wallet-logo">
           <div class="box">
             <span>{{ formatAddr(store.state.address) }}</span>
           </div>
