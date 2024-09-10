@@ -87,7 +87,7 @@ watch(() => store.state, (newVal) => {
           <span class="sol">SOL</span>
         </div>
         <div class="address flex-center-center">
-          <img v-if="store.state.wallet == 'phantom'" src="../assets/images/icon/phantom.svg" alt="" class="wallet-logo">
+          <img :src="store.state.walletLogo" alt="" class="wallet-logo">
           <div class="box">
             <span>{{ formatAddr(store.state.address) }}</span>
           </div>
@@ -114,19 +114,19 @@ watch(() => store.state, (newVal) => {
         <div class="list">
           <div class="item flex-center-sb" @click="connectWallet('phantom')">
             <span>Phantom</span>
-            <img src="../assets/images/icon/phantom.svg" alt="">
+            <img src="../assets/images/phantom.png" alt="">
           </div>
           <div class="item flex-center-sb">
             <span>OKX</span>
-            <img src="../assets/images/icon/okx.svg" alt="">
+            <img src="../assets/images/okx.png" alt="">
           </div>
           <div class="item flex-center-sb">
             <span>Backpack</span>
-            <img src="../assets/images/icon/backpack.svg" alt="">
+            <img src="../assets/images/backpack.png" alt="">
           </div>
           <div class="item flex-center-sb">
             <span>Solflare</span>
-            <img src="../assets/images/icon/solflare.svg" alt="">
+            <img src="../assets/images/solflare.png" alt="">
           </div>
         </div>
         <p class="hint">By continuing, you agree to our <span>Terms of Use</span></p>
