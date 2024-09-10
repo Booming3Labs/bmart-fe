@@ -36,14 +36,14 @@ const submit = () => {
     body: JSON.stringify(data.value)
   }).then(res => res.json()).then(res => {
     console.log(res);
-    router.replace('/warehouse');
+    router.replace('/warehouse/');
   });
 }
 </script>
 <template>
   <div class="wrapper">
     <div class="content" style="padding-bottom: 100px;">
-      <Breadcrumb :list="[{name: '我的仓库', path: 'warehouse'}, {name: '创建新商品'}]" />
+      <Breadcrumb :list="[{name: '我的仓库', path: '/warehouse/'}, {name: '创建新商品'}]" />
       <div class="form flex-start-sb">
         <div class="l">
           <div class="form-item">

@@ -21,7 +21,7 @@ const update = async (item) => {
 }
 
 const create = () => {
-  router.push('/post');
+  router.push('/post/');
 }
 </script>
 <template>
