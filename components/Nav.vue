@@ -87,7 +87,7 @@ watch(() => store.state, (newVal) => {
           <span class="sol">SOL</span>
         </div>
         <div class="address flex-center-center">
-          <img :src="store.state.walletLogo" alt="" class="wallet-logo">
+          <!-- <img :src="store.state.walletLogo" alt="" class="wallet-logo"> -->
           <div class="box">
             <span>{{ formatAddr(store.state.address) }}</span>
           </div>
