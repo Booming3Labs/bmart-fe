@@ -114,19 +114,19 @@ watch(() => store.state, (newVal) => {
         <div class="list">
           <div class="item flex-center-sb" @click="connectWallet('phantom')">
             <span>Phantom</span>
-            <img src="../assets/images/phantom.png" alt="">
+            <!-- <img src="../assets/images/phantom.png" alt=""> -->
           </div>
           <div class="item flex-center-sb">
             <span>OKX</span>
-            <img src="../assets/images/okx.png" alt="">
+            <!-- <img src="../assets/images/okx.png" alt=""> -->
           </div>
           <div class="item flex-center-sb">
             <span>Backpack</span>
-            <img src="../assets/images/backpack.png" alt="">
+            <!-- <img src="../assets/images/backpack.png" alt=""> -->
           </div>
           <div class="item flex-center-sb">
             <span>Solflare</span>
-            <img src="../assets/images/solflare.png" alt="">
+            <!-- <img src="../assets/images/solflare.png" alt=""> -->
           </div>
         </div>
         <p class="hint">By continuing, you agree to our <span>Terms of Use</span></p>
