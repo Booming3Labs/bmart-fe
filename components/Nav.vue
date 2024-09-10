@@ -108,7 +108,7 @@ watch(() => store.state, (newVal) => {
       <div class="selsct-wallet-box">
         <img src="../assets/images/icon/close.svg" alt="" class="close">
         <div class="title flex-center-start">
-          <img src="../assets/images/icon/wallet.svg" alt="">
+          <img src="../assets/images/wallet.png" alt="">
           <span>选择钱包</span>
         </div>
         <div class="list">
