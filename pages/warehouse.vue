@@ -1,7 +1,7 @@
 <script setup>
 const addr = '0x888888'
 const { data, status, error, refresh, clear } = await useFetch(`https://blinkmart.up.railway.app/api/skus?populate=*&filters[seller_addr]=${addr}`);
-
+const router = useRouter();
 const update = async (item) => {
   console.log(item);
   const res = await fetch(`https://blinkmart.up.railway.app/api/skus/${item.id}`, {
@@ -19,13 +19,17 @@ const update = async (item) => {
     refresh();
   }
 }
+
+const create = () => {
+  router.push('/post');
+}
 </script>
 <template>
   <div class="wrapper">
     <div class="content" style="padding-bottom: 100px;">
-      <Breadcrumb name="我的仓库" />
+      <Breadcrumb :list="[{name: '我的仓库'}]" />
       <BTitle title="我的仓库" style="margin-top: 8px;margin-bottom: 20px;">
-        <div class="add-btn flex-center-center">
+        <div class="add-btn flex-center-center" @click="create">
           <span>+</span><img src="../assets/images/icon/package.svg" alt="">创建新商品
         </div>
       </BTitle>

@@ -22,7 +22,7 @@ const updateOrder = async (item) => {
 <template>
   <div class="wrapper">
     <div class="content" style="padding-bottom: 100px;">
-      <Breadcrumb name="个人中心" />
+      <Breadcrumb :list="[{name: '个人中心', path: ''}]" />
       <BTitle title="购买的商品" style="margin-top: 8px;margin-bottom: 20px;"></BTitle>
       <List :list="(status == 'success' && data.code == 0) ? data.data : []" type="order" v-slot="slotProps">
         <div>
