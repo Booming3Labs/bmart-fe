@@ -1,8 +1,9 @@
 <script setup>
-const props = defineProps(['text', 'background']);
+const props = defineProps(['text', 'background', 'notAllowed']);
+console.log(props);
 </script>
 <template>
-  <button :style="{background: background ? background : '#5D104B'}">{{ text }}</button>
+  <button :style="{background: background ? background : '#5D104B', cursor: notAllowed ? 'not-allowed' : 'pointer'}">{{ text }}</button>
 </template>
 <style lang="scss" scoped>
 button {

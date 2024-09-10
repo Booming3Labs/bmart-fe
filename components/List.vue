@@ -1,26 +1,51 @@
+<script setup>
+import { ref, watch } from 'vue';
+const props = defineProps(['list', 'type']);
+
+const dataList = ref([]);
+
+const getImg = (item) => {
+  return `https://blinkmart.up.railway.app${item.sku_image[0].url}`;
+};
+
+watch(() => props.list, (newVal) => {
+  console.log(newVal);
+  dataList.value = newVal.map((item) => {
+    return {
+      ...item,
+      ...item.sku_rel
+    };
+  });
+  console.log(dataList.value);
+}, { immediate: true });
+</script>
 <template>
   <div class="list">
-    <div v-for="i in 5" :key="i" class="item flex-center-sb">
+    <div v-for="item in dataList" :key="item.id" class="item flex-center-sb">
       <div class="img">
-        <img src="../assets/images/goods.png" alt="">
+        <img :src="getImg(item)" alt="">
       </div>
       <div class="info flex-start-sb">
-        <h5 class="name">花里胡哨小衬衫</h5>
-        <p class="desc">物品简介: 身上穿点花里胡哨，出门真的碉堡，极致的潮流是返璞归真的低调，纯棉舒适，值得你白天夜里24小时穿上的衣服物品简介: 身上穿点花里胡哨，出门真的碉堡，极致的潮流是返璞归真的低调，纯棉舒适，值得你白天夜里24小时穿上的衣服</p>
+        <h5 class="name">{{ item.name }}</h5>
+        <p class="desc">物品简介: {{ item.desc }}</p>
         <div class="price flex-center-start">
-          <p>单价: 8.88</p>
+          <p>单价: {{ item.price }}</p>
           <button>SOL</button>
-          <div class="count flex-center-start">
-            <label>总量: <span>10</span></label>
+          <div v-if="type == 'warehouse'" class="count flex-center-start">
+            <label>总量: <span>{{ item.spu }}</span></label>
             <div class="line"></div>
-            <label>已售: <span>1</span></label>
-            <label>数量: <span>1</span></label>
+            <label>已售: <span>{{ item.sales_amount }}</span></label>
+          </div>
+          <div v-else class="count flex-center-start">
+            <label>数量: <span>{{ item.sku_amounts }}</span></label>
           </div>
         </div>
       </div>
       <div class="btns flex-end-sb">
-        <p class="status">上架中</p>
-        <slot></slot>
+        <p v-if="type == 'warehouse'" class="status" :style="{background: item.shelf_status ? '#E9FFF6' : '#FFE8C5', color: item.shelf_status ? '#319470' : '#C6821C'}">{{ item.shelf_status ? '上架中' : '已下架' }}</p>
+        <p v-else-if="type == 'order'" class="status" :style="{background: item.shelf_status == 2 ? '#C5E6FF' : '#FFEDE9', color: item.shelf_status == 2 ? '#1C89C6' : '#B5370F'}">{{ item.deliever_status == 2 ? '已收货' : '等待收货' }}</p>
+        <p v-else></p>
+        <slot :item="item"></slot>
       </div>
     </div>
   </div>

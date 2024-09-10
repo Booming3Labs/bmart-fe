@@ -1,11 +1,32 @@
+<script setup>
+const addr = '0x111111'
+const { data, status, error, refresh, clear } = await useFetch(`https://blinkmart.up.railway.app/api/bm-orders?populate[sku_rel][populate][0]=sku_image&filters[buyer_addr]=${addr}`);
+const updateOrder = async (item) => {
+  console.log(item);
+  const res = await fetch(`https://blinkmart.up.railway.app/api/bm-orders/${item.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      deliever_status: 2
+    })
+  });
+  const result = await res.json();
+  console.log(result);
+  if (result.code == 0) {
+    refresh();
+  }
+}
+</script>
 <template>
   <div class="wrapper">
     <div class="content" style="padding-bottom: 100px;">
       <Breadcrumb name="个人中心" />
       <BTitle title="购买的商品" style="margin-top: 8px;margin-bottom: 20px;"></BTitle>
-      <List>
+      <List :list="(status == 'success' && data.code == 0) ? data.data : []" type="order" v-slot="slotProps">
         <div>
-          <AButton text="确认收货" />
+          <AButton v-if="slotProps.item.deliever_status == 1" text="确认收货" @click="updateOrder(slotProps.item)" />
         </div>
       </List>
     </div>

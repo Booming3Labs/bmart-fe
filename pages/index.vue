@@ -1,40 +1,29 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import img1 from '../assets/images/newArrivals/1.png';
-import img2 from '../assets/images/newArrivals/2.png';
-import img3 from '../assets/images/newArrivals/3.png';
-import img4 from '../assets/images/newArrivals/4.png';
+import { ref, onBeforeMount } from "vue";
 
-const list = ref([
-  {
-    id: 1,
-    img: img1,
-    name: '莆田系T-SHIRT',
-    desc: '低价高品,帅的一P',
-    price: '2.80',
-  },
-  {
-    id: 2,
-    img: img2,
-    name: '养牛2年半',
-    desc: '这条牛仔裤真的很帅',
-    price: '1.50',
-  },
-  {
-    id: 3,
-    img: img3,
-    name: '程序员格子衫',
-    desc: '经典无需多言',
-    price: '4.91',
-  },
-  {
-    id: 4,
-    img: img4,
-    name: '绿色环保衣',
-    desc: `身上穿点绿，生活才有趣，极致的潮流是返璞归真的低调，纯棉舒适，值得你白天夜里24小时穿上的衣服`,
-    price: '8.88',
-  },
-]);
+const { data, status, error, refresh, clear } = await useFetch(`https://blinkmart.up.railway.app/api/skus?populate=*&sort=createdAt:desc`);
+
+const getList = () => {
+  const list = data?.value?.data || [];
+  if (!list) {
+    return []
+  } else {
+    console.log(list)
+    // list 前四个
+    return list.slice(0, 4).map(item => {
+      return {
+        id: item.id,
+        img: `https://blinkmart.up.railway.app${item.sku_image[0].url}`,
+        name: item.name,
+        desc: item.desc,
+        price: item.price
+      }
+    })
+  }
+}
+
+onBeforeMount(() => {
+});
 </script>
 <template>
   <div class="wrapper">
@@ -44,7 +33,7 @@ const list = ref([
     <section class="content">
       <h2 class="title">NEW ARRIVALS</h2>
       <div class="list flex-center-sb">
-        <div v-for="item in list" :key="item.id" class="item">
+        <div v-for="item in getList()" :key="item.id" class="item">
           <div class="img">
             <img :src="item.img" alt="">
           </div>
