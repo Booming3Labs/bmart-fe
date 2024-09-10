@@ -269,6 +269,7 @@ watch(() => store.state, (newVal) => {
       background-color: #fff;
       padding-top: 12px;
       display: none;
+      border-radius: 16px;
     }
     .wallet-popup {
       background-color: #262626;
