@@ -1,8 +1,8 @@
 import { reactive } from "vue";
-import Phantom from '../assets/images/phantom.png';
-import OKX from '../assets/images/okx.png';
-import Backpack from '../assets/images/backpack.png';
-import Solflare from '../assets/images/solflare.png';
+// import Phantom from '../assets/images/phantom.png';
+// import OKX from '../assets/images/okx.png';
+// import Backpack from '../assets/images/backpack.png';
+// import Solflare from '../assets/images/solflare.png';
 
 
 const store = reactive({
@@ -19,7 +19,7 @@ const setWallet = async ({balance, address, wallet}) => {
   store.state.address = address;
   store.state.isConnited = true;
   if (wallet == 'phantom') {
-    store.state.walletLogo = Phantom;
+    // store.state.walletLogo = Phantom;
   }
   console.log('store.state', store.state);
 };
