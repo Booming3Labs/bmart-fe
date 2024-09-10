@@ -114,7 +114,7 @@ watch(() => store.state, (newVal) => {
         <div class="list">
           <div class="item flex-center-sb" @click="connectWallet('phantom')">
             <span>Phantom</span>
-            <!-- <img src="../assets/images/phantom.png" alt=""> -->
+            <img src="../assets/images/phantom.png" alt="">
           </div>
           <div class="item flex-center-sb">
             <span>OKX</span>
